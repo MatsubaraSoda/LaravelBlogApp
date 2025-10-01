@@ -2,6 +2,12 @@
 
 # 生产环境启动脚本
 
+# ========== 动态端口配置（Railway 兼容） ==========
+# Railway 会设置 PORT 环境变量，本地部署时默认使用 80
+export NGINX_PORT=${PORT:-80}
+echo "配置 Nginx 监听端口: $NGINX_PORT"
+sed -i "s/listen 80;/listen $NGINX_PORT;/" /etc/nginx/sites-available/default
+
 # 启动 MySQL 服务
 echo "启动 MySQL 服务..."
 service mysql start

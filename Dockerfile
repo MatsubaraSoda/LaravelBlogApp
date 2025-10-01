@@ -121,19 +121,23 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 # 启动服务
 CMD ["/start.sh"]
 
-# 构建镜像: docker build -t laravelblog:ver07 -f Dockerfile.07 .
+# 构建镜像（本地）: docker build -t laravelblog:latest -f Dockerfile .
+# 构建镜像（Railway）: 自动检测并构建
 # 
-# 生产环境运行:
-# docker run -d -p 8080:80 --name LaravelBlogApp07 \
+# 本地运行:
+# docker run -d -p 8080:80 --name LaravelBlogApp \
 #   -e APP_URL=http://localhost:8080 \
-#   laravelblog:ver07
+#   laravelblog:latest
 #
 # 访问应用: http://localhost:8080
 # 后台管理: http://localhost:8080/admin
 # 
-# 生产环境说明:
+# 部署说明:
 # - APP_ENV=production, APP_DEBUG=false
 # - 权限设置为 755（生产安全）
 # - 缓存优化已启用
 # - 健康检查已配置
 # - 自动导入所有建站文章数据
+# - 支持动态端口（Railway 兼容）
+# - 适用于本地和云端部署
+

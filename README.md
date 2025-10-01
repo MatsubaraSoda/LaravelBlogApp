@@ -13,14 +13,14 @@ docker pull ubuntu:22.04
 ```bash
 git clone https://github.com/MatsubaraSoda/LaravelBlogApp.git
 cd LaravelBlogApp
-docker build -t laravelblog:ver07 -f Dockerfile.07 .
+docker build -t laravelblog:latest -f Dockerfile .
 ```
 
 ### 3. 运行容器
 ```bash
-docker run -d -p 8080:80 --name LaravelBlogApp07 \
+docker run -d -p 8080:80 --name LaravelBlogApp \
   -e APP_URL=http://localhost:8080 \
-  laravelblog:ver07
+  laravelblog:latest
 ```
 
 ### 4. 访问应用
@@ -47,18 +47,18 @@ docker run -d -p 8080:80 --name LaravelBlogApp07 \
 
 ```bash
 # 查看日志
-docker logs -f LaravelBlogApp07
+docker logs -f LaravelBlogApp
 
 # 停止容器
-docker stop LaravelBlogApp07
+docker stop LaravelBlogApp
 
 # 删除容器
-docker rm LaravelBlogApp07
+docker rm LaravelBlogApp
 
 # 重新部署
-docker stop LaravelBlogApp07 && docker rm LaravelBlogApp07
-docker build -t laravelblog:ver07 -f Dockerfile.07 .
-docker run -d -p 8080:80 --name LaravelBlogApp07 -e APP_URL=http://localhost:8080 laravelblog:ver07
+docker stop LaravelBlogApp && docker rm LaravelBlogApp
+docker build -t laravelblog:latest -f Dockerfile .
+docker run -d -p 8080:80 --name LaravelBlogApp -e APP_URL=http://localhost:8080 laravelblog:latest
 ```
 
 ## 📚 功能特性
