@@ -5,17 +5,20 @@
 ## 快速部署
 
 ```bash
-# 1. 克隆项目
+# 1. 拉取基础镜像
+docker pull ubuntu:22.04
+
+# 2. 克隆项目
 git clone https://github.com/MatsubaraSoda/LaravelBlogApp.git
 cd LaravelBlogApp
 
-# 2. 构建镜像（首次需要 10-20 分钟）
+# 3. 构建镜像（首次需要 10-20 分钟）
 docker build -t laravelblog:latest -f Dockerfile .
 
-# 3. 运行容器
+# 4. 运行容器
 docker run -d -p 8080:80 --name LaravelBlogApp laravelblog:latest
 
-# 4. 等待 30 秒后访问
+# 5. 等待 30 秒后访问
 ```
 
 **访问地址**：
@@ -44,12 +47,12 @@ docker stop LaravelBlogApp && docker rm LaravelBlogApp
 
 Laravel 10.x + MySQL 8.x + Nginx + AdminLTE + Clean Blog
 
-## 功能
+## 应用功能
 
 - 三级权限系统（管理员/编辑者/访客）
 - 文章管理（创建、编辑、发布）
-- Markdown 编辑器（实时预览）
-- 用户管理（仅管理员）
+- Markdown 编辑器
+- 用户管理（需要管理员权限）
 - 内置 10 篇开发文档
 
 ## 说明
