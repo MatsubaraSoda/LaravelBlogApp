@@ -93,6 +93,14 @@ RUN service mysql start && \
     mysql -e "SET NAMES utf8mb4; SET CHARACTER SET utf8mb4;" && \
     mysql < /docker-entrypoint-initdb.d/init.sql
 
+# 创建 Laravel 必需的目录结构
+RUN mkdir -p storage/framework/cache/data \
+             storage/framework/sessions \
+             storage/framework/testing \
+             storage/framework/views \
+             storage/logs \
+             storage/app/public
+
 # 设置生产环境权限（755 替代 777）
 RUN chown -R www-data:www-data /var/www/laravel && \
     chmod -R 755 /var/www/laravel && \
@@ -112,7 +120,8 @@ EXPOSE 80 3306
 
 # 复制启动脚本
 COPY start.sh /start.sh
-RUN chmod +x /start.sh
+RUN chmod +x /start.sh && \
+    sed -i 's/\r$//' /start.sh
 
 # 健康检查
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
